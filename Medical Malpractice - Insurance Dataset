@@ -1,0 +1,49 @@
+# For this project, I downloaded Medical Malpractice - Insurance Dataset from Kaggle. Where I performed analytics on the data using SQL. 
+Including claim payment amounts, information about the physician and lawsuits, etc.. The data set contains information 
+about the last 79210 claim payments made.
+
+#1. Every specialty where medical malpractice occurs
+SELECT Specialty
+FROM BIT_DB."medical malpractice"
+Group By Specialty;
+
+#2. What was the largest claim payment amount where the severity is a level 9
+SELECT Max(amount)
+FROM BIT_DB."medical malpractice"
+Where severity is'9';
+
+#3. Every OBGYN malpractice claim where there was no insurance present and the patient age was 10 and under. 
+SELECT *
+FROM BIT_DB."medical malpractice"
+Where Specialty IS 'OBGYN'
+AND Insurance IS 'No Insurance'
+AND AGE < '10'
+Order By Age;
+
+#4. The minimum claim payment amounts
+SELECT Min(Amount)as 'claim payment amounts'
+FROM BIT_DB."medical malpractice"
+
+#6. How many medical malpractice claims had insurance and where it doesn't include 'unknown' or 'no insurance'
+SELECT COUNT(*) as 'Claims' 
+FROM BIT_DB."medical malpractice"
+WHERE Insurance NOT LIKE 'Unknown'
+AND Insurance NOT LIKE 'No Insurance'
+
+#6. The average amount of claim payment amounts
+SELECT AVG(amount)
+FROM BIT_DB."medical malpractice"
+
+#7.SELECT SUM(amount) as 'Sum total'
+FROM BIT_DB."medical malpractice"
+WHERE Specialty IS 'Family Practice' 
+
+#8' What is the sum total amount which Family Practice paid for medical malpractice claims.
+SELECT SUM(amount) as 'Sum total'
+FROM BIT_DB."medical malpractice"
+WHERE Specialty IS 'Family Practice' 
+#9. What is the average level of severity occurs under Anesthesiology'
+SELECT AVG(severity)
+FROM BIT_DB."medical malpractice"
+WHERE Specialty IS 'Anesthesiology' 
+
